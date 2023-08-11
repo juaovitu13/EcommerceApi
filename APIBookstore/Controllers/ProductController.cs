@@ -8,7 +8,7 @@ using APIBookstore.Models;
 namespace APIBookstore.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class ProductController : ControllerBase
     {
         private readonly ProductContext _context;
