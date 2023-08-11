@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIBookstore.Migrations
 {
     [DbContext(typeof(ProductContext))]
-    [Migration("20230811193653_CriacaoBancoDeDados")]
+    [Migration("20230811200918_CriacaoBancoDeDados")]
     partial class CriacaoBancoDeDados
     {
         /// <inheritdoc />
@@ -26,8 +26,11 @@ namespace APIBookstore.Migrations
 
             modelBuilder.Entity("APIBookstore.Models.Product", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Category")
                         .IsRequired()
