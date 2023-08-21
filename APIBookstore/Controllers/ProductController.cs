@@ -43,7 +43,7 @@ namespace APIBookstore.Controllers
         }
 
         [HttpPut]
-        public IActionResult Toupdate(Product product)
+        public IActionResult ToUpdate(Product product)
         {
             var ProductBanco = _context.Products.Find(product.Id);
 
