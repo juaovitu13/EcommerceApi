@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Book } from './model/books.model';
+import { BooksService } from './product-list.service';
 
 @Component({
   selector: 'app-product-list',
