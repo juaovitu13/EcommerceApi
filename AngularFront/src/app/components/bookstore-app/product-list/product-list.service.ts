@@ -1,36 +1,27 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Book} from "./model/books.model";
+import { Book } from "./model/books.model";
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, retry } from 'rxjs/operators';
-
-
-export const books: Book[] = [
- 
-  ];
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
-
-
 export class BooksService {
 
-  private url = 'http://localhost:5028/Product';  // URL to web api
+  private url = 'http://localhost:5028/Product';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
-    
-   constructor( private http: HttpClient){}
 
+  constructor(private http: HttpClient) {}
 
-    // getBooks(){
-    //     return books;
-    // }
-
-    getBooks() {
-      return this.http.get(this.url)
-
-  
-    }
-
+  getBooks(): Observable<Book[]> {
+    return this.http.get<Book[]>(this.url)
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching books:', error);
+          return throwError('Something went wrong while fetching books.');
+        })
+      );
+  }
 }

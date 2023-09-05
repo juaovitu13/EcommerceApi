@@ -1,4 +1,3 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Book } from './model/books.model';
 import { BooksService } from './product-list.service';
@@ -9,24 +8,16 @@ import { BooksService } from './product-list.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  livros!: Book[]; // Corrigido para definir o tipo como Book[]
 
-  livros: any;
-  booksService: BooksService;
-
-  constructor(  booksService: BooksService) {
-
-    this.booksService = booksService;
-
-    // this.booksService = new BooksService();
-   }
-
-  ngOnInit(): void {
-
-    this.livros = this.booksService.getBooks().subscribe((data => {
-      this.livros = data;
-      console.log(this.livros);
-    }))
-
+  constructor(private booksService: BooksService) {
+    // Injeção de dependência do serviço BooksService no construtor
   }
 
+  ngOnInit(): void {
+    this.booksService.getBooks().subscribe((data: Book[]) => {
+      this.livros = data;
+      console.log(this.livros);
+    });
+  }
 }
